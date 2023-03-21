@@ -1,4 +1,4 @@
-git+https://github.com/kilean20/pyBO.git@6cdc62d
+git+https://github.com/kilean20/pyBO.git@d84d0bb
 numpy==1.24.2
 scipy==1.10.1
 # matplotlib==3.3.4
