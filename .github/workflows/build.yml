@@ -1,0 +1,40 @@
+name: build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2.3.1
+      with:
+        persist-credentils: false
+    - name: Set up Python 3.9.2
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9.2
+    - name: Install requires
+      run: |
+        pip install virtualenv
+    - name: Test
+      run: |
+        virtualenv --version
+        pip --version
+        python --version
+    - name: Build env
+      run: |
+        make env env-pkg
+    - name: push
+      run: |
+        mkdir dist
+        find /home/runner/ap-ml_env -iname '*.pyc' -exec rm {} \;
+        cp -arv /home/runner/ap-ml_env/* dist
+        cd dist; ls -lhtr; cat pyvenv.cfg
+
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: dist
+        FOLDER: dist
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
