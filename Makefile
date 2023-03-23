@@ -7,7 +7,7 @@
 .PHONY: env env-pkg clean
 
 ENV_DIR := ${HOME}/ap-ml_env
-PIP_FLAGS := --upgrade --force-reinstall --no-cache-dir #--no-deps
+PIP_FLAGS := --upgrade --force-reinstall --no-cache-dir --no-deps
 
 env:
 	virtualenv $(ENV_DIR)
