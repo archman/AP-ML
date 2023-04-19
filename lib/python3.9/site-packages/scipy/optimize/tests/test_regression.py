@@ -8,7 +8,7 @@ from pytest import raises as assert_raises
 import scipy.optimize
 
 
-class TestRegression:
+class TestRegression(object):
 
     def test_newton_x0_is_0(self):
         # Regression test for gh-1601

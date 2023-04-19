@@ -16,7 +16,7 @@ INVALID_POINTS = [
 ]
 
 
-class TestGammainc:
+class TestGammainc(object):
 
     @pytest.mark.parametrize('a, x', INVALID_POINTS)
     def test_domain(self, a, x):
@@ -86,7 +86,7 @@ class TestGammainc:
         assert_allclose(x, y, rtol=1e-10)
 
 
-class TestGammaincc:
+class TestGammaincc(object):
 
     @pytest.mark.parametrize('a, x', INVALID_POINTS)
     def test_domain(self, a, x):

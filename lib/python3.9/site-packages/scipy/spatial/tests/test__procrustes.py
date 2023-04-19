@@ -5,7 +5,7 @@ from pytest import raises as assert_raises
 from scipy.spatial import procrustes
 
 
-class TestProcrustes:
+class TestProcrustes(object):
     def setup_method(self):
         """creates inputs"""
         # an L

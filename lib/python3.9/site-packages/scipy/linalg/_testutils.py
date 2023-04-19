@@ -1,13 +1,13 @@
 import numpy as np
 
 
-class _FakeMatrix:
+class _FakeMatrix(object):
     def __init__(self, data):
         self._data = data
         self.__array_interface__ = data.__array_interface__
 
 
-class _FakeMatrix2:
+class _FakeMatrix2(object):
     def __init__(self, data):
         self._data = data
 

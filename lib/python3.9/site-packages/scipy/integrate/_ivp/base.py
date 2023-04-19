@@ -22,7 +22,7 @@ def check_arguments(fun, y0, support_complex):
     return fun_wrapped, y0
 
 
-class OdeSolver:
+class OdeSolver(object):
     """Base class for ODE solvers.
 
     In order to implement a new solver you need to follow the guidelines:
@@ -214,7 +214,7 @@ class OdeSolver:
         raise NotImplementedError
 
 
-class DenseOutput:
+class DenseOutput(object):
     """Base class for local interpolant over step made by an ODE solver.
 
     It interpolates between `t_min` and `t_max` (see Attributes below).
@@ -262,7 +262,7 @@ class ConstantDenseOutput(DenseOutput):
     or a system with 0 equations.
     """
     def __init__(self, t_old, t, value):
-        super().__init__(t_old, t)
+        super(ConstantDenseOutput, self).__init__(t_old, t)
         self.value = value
 
     def _call_impl(self, t):

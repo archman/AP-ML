@@ -79,7 +79,7 @@ def direct_shift(x,a,period=None):
     return ifft(fft(x)*exp(k*a)).real
 
 
-class TestDiff:
+class TestDiff(object):
 
     def test_definition(self):
         for n in [16,17,64,127,32]:
@@ -188,7 +188,7 @@ class TestDiff:
                 assert_array_almost_equal(diff(diff(f,-k),k),f)
 
 
-class TestTilbert:
+class TestTilbert(object):
 
     def test_definition(self):
         for h in [0.1,0.5,1,5.5,10]:
@@ -222,7 +222,7 @@ class TestTilbert:
                 assert_array_almost_equal(tilbert(itilbert(f,h),h),f)
 
 
-class TestITilbert:
+class TestITilbert(object):
 
     def test_definition(self):
         for h in [0.1,0.5,1,5.5,10]:
@@ -237,7 +237,7 @@ class TestITilbert:
                                           direct_itilbert(sin(2*x),h))
 
 
-class TestHilbert:
+class TestHilbert(object):
 
     def test_definition(self):
         for n in [16,17,64,127]:
@@ -279,7 +279,7 @@ class TestHilbert:
             assert_array_almost_equal(hilbert(ihilbert(f)),f)
 
 
-class TestIHilbert:
+class TestIHilbert(object):
 
     def test_definition(self):
         for n in [16,17,64,127]:
@@ -301,7 +301,7 @@ class TestIHilbert:
             assert_array_almost_equal(y,y2)
 
 
-class TestShift:
+class TestShift(object):
 
     def test_definition(self):
         for n in [18,17,64,127,32,2048,256]:
@@ -318,7 +318,7 @@ class TestShift:
             assert_array_almost_equal(shift(sin(x),pi/2),cos(x))
 
 
-class TestOverwrite:
+class TestOverwrite(object):
     """Check input overwrite behavior """
 
     real_dtypes = (np.float32, np.float64)

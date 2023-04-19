@@ -12,7 +12,7 @@ from scipy.signal import (dlsim, dstep, dimpulse, tf2zpk, lti, dlti,
                           dfreqresp, dbode, BadCoefficients)
 
 
-class TestDLTI:
+class TestDLTI(object):
 
     def test_dlsim(self):
 
@@ -281,7 +281,7 @@ class TestDLTI:
         assert_array_equal(y.T, [[0, 1, 0.5]])
 
 
-class TestDlti:
+class TestDlti(object):
     def test_dlti_instantiation(self):
         # Test that lti can be instantiated.
 
@@ -312,7 +312,7 @@ class TestDlti:
         assert_raises(ValueError, dlti, 1, 1, 1, 1, 1)
 
 
-class TestStateSpaceDisc:
+class TestStateSpaceDisc(object):
     def test_initialization(self):
         # Check that all initializations work
         dt = 0.05
@@ -343,7 +343,7 @@ class TestStateSpaceDisc:
         assert_equal(s.zeros, [0])
 
 
-class TestTransferFunction:
+class TestTransferFunction(object):
     def test_initialization(self):
         # Check that all initializations work
         dt = 0.05
@@ -373,7 +373,7 @@ class TestTransferFunction:
         assert_equal(s.zeros, [0])
 
 
-class TestZerosPolesGain:
+class TestZerosPolesGain(object):
     def test_initialization(self):
         # Check that all initializations work
         dt = 0.05
@@ -394,7 +394,7 @@ class TestZerosPolesGain:
         assert_(s.to_zpk() is not s)
 
 
-class Test_dfreqresp:
+class Test_dfreqresp(object):
 
     def test_manual(self):
         # Test dfreqresp() real part calculation (manual sanity check).
@@ -485,7 +485,7 @@ class Test_dfreqresp:
         assert_almost_equal(H1, H2)
 
 
-class Test_bode:
+class Test_bode(object):
 
     def test_manual(self):
         # Test bode() magnitude calculation (manual sanity check).
@@ -557,7 +557,7 @@ class Test_bode:
         assert_raises(AttributeError, dbode, system)
 
 
-class TestTransferFunctionZConversion:
+class TestTransferFunctionZConversion(object):
     """Test private conversions between 'z' and 'z**-1' polynomials."""
 
     def test_full(self):

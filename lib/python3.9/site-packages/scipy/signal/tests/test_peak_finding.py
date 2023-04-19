@@ -20,7 +20,6 @@ from scipy.signal._peak_finding import (
     find_peaks_cwt,
     _identify_ridge_lines
 )
-from scipy.signal.windows import gaussian
 from scipy.signal._peak_finding_utils import _local_maxima_1d, PeakPropertyWarning
 
 
@@ -84,7 +83,7 @@ def _gen_ridge_line(start_locs, max_locs, length, distances, gaps):
     return [locs[:, 0], locs[:, 1]]
 
 
-class TestLocalMaxima1d:
+class TestLocalMaxima1d(object):
 
     def test_empty(self):
         """Test with empty signal."""
@@ -135,7 +134,7 @@ class TestLocalMaxima1d:
         """Test input validation and raised exceptions."""
         with raises(ValueError, match="wrong number of dimensions"):
             _local_maxima_1d(np.ones((1, 1)))
-        with raises(ValueError, match="expected 'const float64_t'"):
+        with raises(ValueError, match="expected 'float64_t'"):
             _local_maxima_1d(np.ones(1, dtype=int))
         with raises(TypeError, match="list"):
             _local_maxima_1d([1., 2.])
@@ -143,7 +142,7 @@ class TestLocalMaxima1d:
             _local_maxima_1d(None)
 
 
-class TestRidgeLines:
+class TestRidgeLines(object):
 
     def test_empty(self):
         test_matr = np.zeros([20, 100])
@@ -235,7 +234,7 @@ class TestRidgeLines:
             np.testing.assert_array_less(np.abs(agaps), max(gaps) + 0.1)
 
 
-class TestArgrel:
+class TestArgrel(object):
 
     def test_empty(self):
         # Regression test for gh-2832.
@@ -318,7 +317,7 @@ class TestArgrel:
             assert_((act_locs == (rel_max_cols[inds] - rot_factor*rw)).all())
 
 
-class TestPeakProminences:
+class TestPeakProminences(object):
 
     def test_empty(self):
         """
@@ -435,7 +434,7 @@ class TestPeakProminences:
             peak_prominences([0, 1, 1, 1, 0], [2], wlen=2)
 
 
-class TestPeakWidths:
+class TestPeakWidths(object):
 
     def test_empty(self):
         """
@@ -600,7 +599,7 @@ def test_unpack_condition_args():
         _unpack_condition_args((None, amin_true), np.arange(11), peaks)
 
 
-class TestFindPeaks:
+class TestFindPeaks(object):
 
     # Keys of optionally returned properties
     property_keys = {'peak_heights', 'left_thresholds', 'right_thresholds',
@@ -770,28 +769,8 @@ class TestFindPeaks:
         for key in ("left_bases", "right_bases", "left_ips", "right_ips"):
             assert_equal(props[key], peaks)
 
-    @pytest.mark.parametrize("kwargs", [
-        {},
-        {"distance": 3.0},
-        {"prominence": (None, None)},
-        {"width": (None, 2)},
 
-    ])
-    def test_readonly_array(self, kwargs):
-        """
-        Test readonly arrays are accepted.
-        """
-        x = np.linspace(0, 10, 15)
-        x_readonly = x.copy()
-        x_readonly.flags.writeable = False
-
-        peaks, _ = find_peaks(x)
-        peaks_readonly, _ = find_peaks(x_readonly, **kwargs)
-
-        assert_allclose(peaks, peaks_readonly)
-
-
-class TestFindPeaksCwt:
+class TestFindPeaksCwt(object):
 
     def test_find_peaks_exact(self):
         """
@@ -841,13 +820,6 @@ class TestFindPeaksCwt:
         found_locs = find_peaks_cwt(test_data, widths, min_snr=5, noise_perc=30)
         np.testing.assert_equal(len(found_locs), 0)
 
-    def test_find_peaks_with_non_default_wavelets(self):
-        x = gaussian(200, 2)
-        widths = np.array([1, 2, 3, 4])
-        a = find_peaks_cwt(x, widths, wavelet=gaussian)
-
-        np.testing.assert_equal(np.array([100]), a)
-
     def test_find_peaks_window_size(self):
         """
         Verify that window_size is passed correctly to private function and
@@ -873,15 +845,3 @@ class TestFindPeaksCwt:
         found_locs = find_peaks_cwt(test_data, widths, gap_thresh=2, min_snr=3,
                                     min_length=None, window_size=20)
         assert found_locs.size == act_locs.size
-
-    def test_find_peaks_with_one_width(self):
-        """
-        Verify that the `width` argument
-        in `find_peaks_cwt` can be a float
-        """
-        xs = np.arange(0, np.pi, 0.05)
-        test_data = np.sin(xs)
-        widths = 1
-        found_locs = find_peaks_cwt(test_data, widths)
-
-        np.testing.assert_equal(found_locs, 32)

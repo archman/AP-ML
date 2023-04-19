@@ -56,7 +56,7 @@ def upfirdn_naive(x, h, up=1, down=1):
     return out
 
 
-class UpFIRDnCase:
+class UpFIRDnCase(object):
     """Test _UpFIRDn object"""
     def __init__(self, up, down, h, x_dtype):
         self.up = up
@@ -113,7 +113,7 @@ class UpFIRDnCase:
 _UPFIRDN_TYPES = (int, np.float32, np.complex64, float, complex)
 
 
-class TestUpfirdn:
+class TestUpfirdn(object):
 
     def test_valid_input(self):
         assert_raises(ValueError, upfirdn, [1], [1], 1, 0)  # up or down < 1
@@ -271,17 +271,3 @@ class TestUpfirdn:
 
         atol = rtol = np.finfo(dtype).eps * 1e2
         assert_allclose(y, y_expected, atol=atol, rtol=rtol)
-
-
-def test_output_len_long_input():
-    # Regression test for gh-17375.  On Windows, a large enough input
-    # that should have been well within the capabilities of 64 bit integers
-    # would result in a 32 bit overflow because of a bug in Cython 0.29.32.
-    len_h = 1001
-    in_len = 10**8
-    up = 320
-    down = 441
-    out_len = _output_len(len_h, in_len, up, down)
-    # The expected value was computed "by hand" from the formula
-    #   (((in_len - 1) * up + len_h) - 1) // down + 1
-    assert out_len == 72562360

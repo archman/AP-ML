@@ -1,4 +1,4 @@
-"""Compute a Pade approximation for the principal branch of the
+"""Compute a Pade approximation for the principle branch of the
 Lambert W function around 0 and compare it to various other
 approximations.
 
@@ -6,8 +6,8 @@ approximations.
 import numpy as np
 
 try:
-    import mpmath
-    import matplotlib.pyplot as plt
+    import mpmath  # type: ignore[import]
+    import matplotlib.pyplot as plt  # type: ignore[import]
 except ImportError:
     pass
 

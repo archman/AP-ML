@@ -3,7 +3,7 @@ import scipy.special as sc
 from numpy.testing import assert_almost_equal, assert_array_equal
 
 
-class TestPdtr:
+class TestPdtr(object):
     def test(self):
         val = sc.pdtr(0, 1)
         assert_almost_equal(val, np.exp(-1))
@@ -25,7 +25,7 @@ class TestPdtr:
         val = sc.pdtr(-1.1, 1.0)
         assert np.isnan(val)
 
-class TestPdtrc:
+class TestPdtrc(object):
     def test_value(self):
         val = sc.pdtrc(0, 1)
         assert_almost_equal(val, 1 - np.exp(-1))

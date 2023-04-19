@@ -17,7 +17,7 @@ from scipy.integrate import odeint, ode, complex_ode
 #------------------------------------------------------------------------------
 
 
-class TestOdeint:
+class TestOdeint(object):
     # Check integrate.odeint
 
     def _do_problem(self, problem):
@@ -52,7 +52,7 @@ class TestOdeint:
             self._do_problem(problem)
 
 
-class TestODEClass:
+class TestODEClass(object):
 
     ode_class = None   # Set in subclass.
 
@@ -229,7 +229,7 @@ class TestComplexOde(TestODEClass):
             self._do_problem(problem, 'dop853')
 
 
-class TestSolout:
+class TestSolout(object):
     # Check integrate.ode correctly handles solout for dopri5 and dop853
     def _run_solout_test(self, integrator):
         # Check correct usage of solout
@@ -319,7 +319,7 @@ class TestSolout:
             self._run_solout_break_test(integrator)
 
 
-class TestComplexSolout:
+class TestComplexSolout(object):
     # Check integrate.ode correctly handles solout for dopri5 and dop853
     def _run_solout_test(self, integrator):
         # Check correct usage of solout
@@ -570,7 +570,7 @@ def jacv(t, x, omega):
     return j
 
 
-class ODECheckParameterUse:
+class ODECheckParameterUse(object):
     """Call an ode-class solver with several cases of parameter use."""
 
     # solver_name must be set before tests can be run with this class.

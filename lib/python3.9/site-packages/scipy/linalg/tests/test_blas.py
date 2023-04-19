@@ -83,7 +83,7 @@ def test_get_blas_funcs_alias():
     assert f is h
 
 
-class TestCBLAS1Simple:
+class TestCBLAS1Simple(object):
 
     def test_axpy(self):
         for p in 'sd':
@@ -100,7 +100,7 @@ class TestCBLAS1Simple:
                                       [7, 10j-1, 18])
 
 
-class TestFBLAS1Simple:
+class TestFBLAS1Simple(object):
 
     def test_axpy(self):
         for p in 'sd':
@@ -218,7 +218,7 @@ class TestFBLAS1Simple:
     # XXX: need tests for rot,rotm,rotg,rotmg
 
 
-class TestFBLAS2Simple:
+class TestFBLAS2Simple(object):
 
     def test_gemv(self):
         for p in 'sd':
@@ -793,7 +793,7 @@ class TestFBLAS2Simple:
             assert_array_almost_equal(y1, y2)
 
 
-class TestFBLAS3Simple:
+class TestFBLAS3Simple(object):
 
     def test_gemm(self):
         for p in 'sd':
@@ -819,7 +819,7 @@ def _get_func(func, ps='sdzc'):
         yield f
 
 
-class TestBLAS3Symm:
+class TestBLAS3Symm(object):
 
     def setup_method(self):
         self.a = np.array([[1., 2.],
@@ -864,7 +864,7 @@ class TestBLAS3Symm:
             assert not np.allclose(res, self.t)
 
 
-class TestBLAS3Syrk:
+class TestBLAS3Syrk(object):
     def setup_method(self):
         self.a = np.array([[1., 0.],
                            [0., -2.],
@@ -901,7 +901,7 @@ class TestBLAS3Syrk:
         # if C is supplied, it must have compatible dimensions
 
 
-class TestBLAS3Syr2k:
+class TestBLAS3Syr2k(object):
     def setup_method(self):
         self.a = np.array([[1., 0.],
                            [0., -2.],
@@ -941,7 +941,7 @@ class TestBLAS3Syr2k:
         # if C is supplied, it must have compatible dimensions
 
 
-class TestSyHe:
+class TestSyHe(object):
     """Quick and simple tests for (zc)-symm, syrk, syr2k."""
 
     def setup_method(self):
@@ -981,7 +981,7 @@ class TestSyHe:
             assert_array_almost_equal(np.triu(res), 2.*np.diag([1, 1]))
 
 
-class TestTRMM:
+class TestTRMM(object):
     """Quick and simple tests for dtrmm."""
 
     def setup_method(self):

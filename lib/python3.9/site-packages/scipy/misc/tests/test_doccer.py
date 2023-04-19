@@ -4,7 +4,7 @@ import sys
 import pytest
 from numpy.testing import assert_equal, suppress_warnings
 
-from scipy._lib import doccer
+from scipy.misc import doccer
 
 # python -OO strips docstrings
 DOCSTRINGS_STRIPPED = sys.flags.optimize > 1
@@ -108,7 +108,7 @@ def test_inherit_docstring_from():
     with suppress_warnings() as sup:
         sup.filter(category=DeprecationWarning)
 
-        class Foo:
+        class Foo(object):
             def func(self):
                 '''Do something useful.'''
                 return
